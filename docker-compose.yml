@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.1.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password #change this
+      MYSQL_DATABASE: lamp_db
+    networks:
+      - php-app-net
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80" # Output to 8080 instead of 80
+    depends_on:
+      - db
+    networks:
+      - php-app-net
+    environment:
+      PMA_HOST: db
+  web:
+    image: php7 # The Dockerfile makes this
+    ports:
+      - "80:80"
+    networks:
+      - php-app-net
+    volumes:
+      - ./html:/var/www/html
+networks:
+  php-app-net:
+    driver: bridge

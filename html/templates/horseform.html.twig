@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Horses{% endblock %}
+
+{% block body %}
+    {{ form_start(horseForm) }}
+    {{ form_widget(horseForm) }}
+    {{ form_end(horseForm) }}
+
+    <!-- form(horseForm) combines all 3 -->
+{% endblock %}
+

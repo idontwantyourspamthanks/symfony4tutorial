@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Horses{% endblock %}
+
+{% block body %}
+    <h1>Your horses... <a class="btn btn-success" href="/horse/new">New Horse</a></h1>
+
+    {% if horseList %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Legs</th>
+                <th>Alive</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for horse in horseList %}
+                <tr>
+                    <td>{{ horse.name }}</td>
+                    <td>{{ horse.legs }}</td>
+                    <td>{{ horse.alive ? 'Alive' : 'Dead' }}</td>
+                    <td>
+                        <a class="btn btn-dark" href="/horse/{{ horse.id }}">Edit</a>
+                        <a class="btn btn-warning" href="/horse/{{ horse.id }}/delete">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Sorry, no horses found</p>
+    {% endif %}
+
+{% endblock %}
+
